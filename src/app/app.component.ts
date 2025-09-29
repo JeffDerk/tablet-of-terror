@@ -1,6 +1,12 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { TodosComponent } from './todos/todos.component';
+import {
+  Component,
+  ElementRef,
+  inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { NgClass } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { Amplify } from 'aws-amplify';
 import outputs from '../../amplify_outputs.json';
 
@@ -11,8 +17,37 @@ Amplify.configure(outputs);
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  imports: [RouterOutlet, TodosComponent],
+  imports: [NgClass],
 })
-export class AppComponent {
-  title = 'amplify-angular-template';
+export class AppComponent implements OnInit {
+  message = 'Geen opdracht';
+  private route = inject(ActivatedRoute);
+
+  @ViewChild('app')
+  private appElement!: ElementRef<HTMLDivElement>;
+
+  @ViewChild('audio')
+  private audioElement!: ElementRef<HTMLAudioElement>;
+
+  ngOnInit() {
+    this.route.queryParams.subscribe((params) => {
+      this.message = params['message'] || 'Geen opdracht';
+    });
+  }
+
+  playAlarm() {
+    const audio = this.audioElement.nativeElement;
+    if (audio.paused) {
+      audio.currentTime = 0;
+      audio.play();
+      console.log('play');
+    } else {
+      audio.pause();
+      console.log('pause');
+    }
+  }
+
+  stopAlarm() {
+    //this.audioElement.nativeElement.pause();
+  }
 }

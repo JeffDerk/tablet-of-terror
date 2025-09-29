@@ -1,0 +1,45 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  will-change: background-color;
+  background: #fff;
+
+  &.play {
+    background: #ffcccc;
+    animation: alarmPulse 0.5s ease-in-out infinite;
+  }
+
+  .alarm {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+audio {
+  display: none;
+}
+
+@keyframes alarmPulse {
+  0% {
+    background-color: #ffd6d6;
+  } /* light */
+  50% {
+    background-color: #e85f62;
+  } /* darker */
+  100% {
+    background-color: #ffd6d6;
+  } /* light */
+}
+
+@keyframes stripesPulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(0.85);
+  }
+}
