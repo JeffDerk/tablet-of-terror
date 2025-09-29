@@ -31,7 +31,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      this.message = params['message'] || 'Geen opdracht';
+      this.message = ((params['message'] || 'Geen opdracht') as string)
+        .replace('#terror', '')
+        .trim();
     });
   }
 
