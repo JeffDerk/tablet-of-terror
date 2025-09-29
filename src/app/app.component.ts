@@ -31,6 +31,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
+      console.log('params ', this.route.snapshot);
       this.message = ((params['message'] || 'Geen opdracht') as string)
         .replace('#terror', '')
         .trim();
@@ -47,9 +48,5 @@ export class AppComponent implements OnInit {
       audio.pause();
       console.log('pause');
     }
-  }
-
-  stopAlarm() {
-    //this.audioElement.nativeElement.pause();
   }
 }
