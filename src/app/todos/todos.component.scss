@@ -1,0 +1,18 @@
+:host {
+    .page {
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .add {
+        height: 30px;
+    }
+    .table {
+        border-collapse: collapse;
+        th, td {
+            text-align: left;
+            padding-right: 2rem;
+        }
+    }
+}

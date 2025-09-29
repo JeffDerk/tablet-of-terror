@@ -10,16 +10,12 @@ const client = generateClient<Schema>();
   standalone: true,
   imports: [CommonModule],
   templateUrl: './todos.component.html',
-  styleUrl: './todos.component.css',
+  styleUrl: './todos.component.scss',
 })
 export class TodosComponent implements OnInit {
   todos: any[] = [];
 
   ngOnInit(): void {
-    this.listTodos();
-  }
-
-  listTodos() {
     try {
       client.models.Todo.observeQuery().subscribe({
         next: ({ items, isSynced }) => {
@@ -31,12 +27,23 @@ export class TodosComponent implements OnInit {
     }
   }
 
-  createTodo() {
+  async createTodo() {
     try {
+      //await client.models.Todo.get({  });
       client.models.Todo.create({
         content: window.prompt('Todo content'),
       });
-      this.listTodos();
+      //this.listTodos();
+    } catch (error) {
+      console.error('error creating todos', error);
+    }
+  }
+
+  async deleteTodo(todo: any) {
+    try {
+      console.log('delete ', todo);
+      await client.models.Todo.delete(todo);
+      //this.listTodos();
     } catch (error) {
       console.error('error creating todos', error);
     }
