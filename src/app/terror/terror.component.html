@@ -7,6 +7,6 @@
   <img class="alarm" src="assets/alarm.webp" />
   <h1 class="message">{{ message }}</h1>
 </div>
-<audio #audio loop [volume]="1">
+<audio #audio loop controls [volume]="1">
   <source src="assets/alarm.mp3" type="audio/mpeg" />
 </audio>

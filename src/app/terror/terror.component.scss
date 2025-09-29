@@ -5,24 +5,21 @@
   justify-content: center;
   height: 100vh;
   will-change: background-color;
-  background: #fff;
+  background: #ffcccc;
 
   &.play {
-    background: #ffcccc;
     animation: alarmPulse 0.5s ease-in-out infinite;
   }
 
   .alarm {
-    height: 50%;
+    height: 25%;
   }
   .message {
     text-align: center;
     font-size: 64px;
+    padding: 1rem;
+    word-break: break-all;
   }
-}
-
-audio {
-  display: none;
 }
 
 @keyframes alarmPulse {
