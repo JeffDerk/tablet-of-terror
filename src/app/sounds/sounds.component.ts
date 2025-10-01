@@ -30,6 +30,7 @@ export class SoundsComponent {
     { name: 'Al weer een winnaar', file: 'Al weer een winnaar.m4a' },
     { name: 'Applausje', file: 'Applausje.m4a' },
     { name: 'Cadeautje uitzoeken', file: 'Cadeautje uitzoeken.m4a' },
+    { name: 'Tututututu', file: 'Tututututu.mp4' },
     { name: 'Fluit liedje', file: 'Fluit liedje.m4a' },
     { name: 'Foute bingo booing', file: 'Foute bingo booing.m4a' },
     { name: 'The Price Is Right', file: 'The Price Is Right.m4a' },
