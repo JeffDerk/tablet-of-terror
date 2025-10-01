@@ -26,6 +26,7 @@ type Sounds = {
 })
 export class SoundsComponent {
   sounds: Sounds[] = [
+    { name: 'Bingo, bingo, bingo!', file: 'Bingo, bingo, bingo!.mp3' },
     { name: 'Al weer een winnaar', file: 'Al weer een winnaar.m4a' },
     { name: 'Applausje', file: 'Applausje.m4a' },
     { name: 'Cadeautje uitzoeken', file: 'Cadeautje uitzoeken.m4a' },
