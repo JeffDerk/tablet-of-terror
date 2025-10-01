@@ -10,7 +10,6 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   templateUrl: './terror.component.html',
   styleUrl: './terror.component.scss',
   imports: [NgClass],
