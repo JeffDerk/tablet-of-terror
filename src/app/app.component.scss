@@ -1,5 +1,15 @@
 :host {
   .app-container {
     height: 100%;
+    padding: 2rem;
+  }
+  header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 0.25rem;
   }
 }

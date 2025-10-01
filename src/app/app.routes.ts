@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { TodosComponent } from './todos/todos.component';
+import { SoundsComponent } from './sounds/sounds.component';
 import { TerrorComponent } from './terror/terror.component';
 
 export const routes: Routes = [
@@ -9,8 +9,8 @@ export const routes: Routes = [
     component: TerrorComponent,
   },
   {
-    path: 'admin',
-    title: 'Admin',
-    component: TodosComponent,
+    path: 'admin/sounds',
+    title: 'Sounds',
+    component: SoundsComponent,
   },
 ];
