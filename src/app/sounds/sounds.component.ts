@@ -7,6 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { generateClient } from 'aws-amplify/data';
+import { uploadData } from 'aws-amplify/storage';
+
 import type { Schema } from '../../../amplify/data/resource';
 import { Button } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -25,7 +27,7 @@ export class SoundsComponent implements OnInit {
 
   form = new FormGroup({
     name: new FormControl('', Validators.required),
-    file: new FormControl('', Validators.required),
+    file: new FormControl<FileList>(undefined as any, Validators.required),
   });
 
   ngOnInit(): void {
@@ -41,11 +43,27 @@ export class SoundsComponent implements OnInit {
   }
 
   async createTodo() {
+    const fileEl = document.getElementById('file') as HTMLInputElement;
+    const file = fileEl.files![0];
     try {
-      //await client.models.Todo.get({  });
-      client.models.Todo.create({
-        name: window.prompt('Todo content'),
-      });
+      const fileReader = new FileReader();
+      fileReader.readAsArrayBuffer(file);
+      fileReader.onload = async (event) => {
+        console.log('Complete File read successfully!', event.target?.result);
+        try {
+          await uploadData({
+            data: event.target?.result!,
+            path: `sounds/${file.name}`,
+          });
+        } catch (e) {
+          console.log('error', e);
+        }
+      };
+
+      // //await client.models.Todo.get({  });
+      // client.models.Todo.create({
+      //   name: window.prompt('Todo content'),
+      // });
       //this.listTodos();
     } catch (error) {
       console.error('error creating todos', error);
