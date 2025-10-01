@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -13,70 +13,48 @@ import type { Schema } from '../../../amplify/data/resource';
 import { Button } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 
-const client = generateClient<Schema>();
+type Sounds = {
+  name: string;
+  file: string;
+};
 
 @Component({
   selector: 'app-sounds',
-  imports: [CommonModule, ReactiveFormsModule, Button, DialogModule],
+  imports: [CommonModule, Button, DialogModule],
   templateUrl: './sounds.component.html',
   styleUrl: './sounds.component.scss',
 })
-export class SoundsComponent implements OnInit {
-  todos: any[] = [];
-  dialogVisible = false;
+export class SoundsComponent {
+  sounds: Sounds[] = [
+    { name: 'Al weer een winnaar', file: 'Al weer een winnaar.m4a' },
+    { name: 'Applausje', file: 'Applausje.m4a' },
+    { name: 'Cadeautje uitzoeken', file: 'Cadeautje uitzoeken.m4a' },
+    { name: 'Fluit liedje', file: 'Fluit liedje.m4a' },
+    { name: 'Foute bingo booing', file: 'Foute bingo booing.m4a' },
+    { name: 'The Price Is Right', file: 'The Price Is Right.m4a' },
+    {
+      name: 'Wacht muziekje tijdens bingo',
+      file: 'Wacht muziekje tijdens bingo.m4a',
+    },
+  ];
+  active = this.sounds[0];
 
-  form = new FormGroup({
-    name: new FormControl('', Validators.required),
-    file: new FormControl<FileList>(undefined as any, Validators.required),
-  });
+  @ViewChild('audio')
+  private audioElement!: ElementRef<HTMLAudioElement>;
 
-  ngOnInit(): void {
-    try {
-      client.models.Todo.observeQuery().subscribe({
-        next: ({ items, isSynced }) => {
-          this.todos = items;
-        },
-      });
-    } catch (error) {
-      console.error('error fetching todos', error);
-    }
-  }
-
-  async createTodo() {
-    const fileEl = document.getElementById('file') as HTMLInputElement;
-    const file = fileEl.files![0];
-    try {
-      const fileReader = new FileReader();
-      fileReader.readAsArrayBuffer(file);
-      fileReader.onload = async (event) => {
-        console.log('Complete File read successfully!', event.target?.result);
-        try {
-          await uploadData({
-            data: event.target?.result!,
-            path: `sounds/${file.name}`,
-          });
-        } catch (e) {
-          console.log('error', e);
-        }
-      };
-
-      // //await client.models.Todo.get({  });
-      // client.models.Todo.create({
-      //   name: window.prompt('Todo content'),
-      // });
-      //this.listTodos();
-    } catch (error) {
-      console.error('error creating todos', error);
-    }
-  }
-
-  async deleteTodo(todo: any) {
-    try {
-      console.log('delete ', todo);
-      await client.models.Todo.delete(todo);
-      //this.listTodos();
-    } catch (error) {
-      console.error('error creating todos', error);
+  playSound(sound: Sounds) {
+    const audio = this.audioElement.nativeElement;
+    if (this.active === sound) {
+      if (!audio.paused) {
+        audio.pause();
+      } else {
+        audio.play();
+      }
+    } else {
+      this.active = sound;
+      audio.src = `assets/sounds/${sound.file}`;
+      audio.currentTime = 0;
+      audio.play();
     }
   }
 }

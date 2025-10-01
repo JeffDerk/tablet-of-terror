@@ -1,63 +1,17 @@
-<h1>Sounds</h1>
-<p-button
-  class="add"
-  label="Add"
-  icon="pi pi-plus"
-  (click)="dialogVisible = true"
-/>
-<table class="table">
-  <thead>
-    <th>ID</th>
-    <th>Text</th>
-  </thead>
-  <tbody>
-    <tr *ngFor="let todo of todos">
-      <td>{{ todo.id }}</td>
-      <td>{{ todo.content }}</td>
-      <td>
-        <p-button icon="pi pi-delete" (click)="deleteTodo(todo)">X</p-button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p-dialog
-  header="Add payout"
-  [(visible)]="dialogVisible"
-  [modal]="true"
-  [style]="{ width: '600px' }"
-  [closable]="false"
-  appendTo="body"
->
-  <form [formGroup]="form">
-    <div class="field">
-      <label for="name">Name</label>
-      <input id="name" type="text" formControlName="name" />
-    </div>
-    <div class="field">
-      <label for="name">Name</label>
-      <input
-        id="file"
-        class="w-full"
-        type="file"
-        accept="audio/mp3,audio/mp4"
-        formControlName="file"
-      />
-    </div>
-    <div class="actions">
-      <p-button
-        label="Cancel"
-        icon="pi pi-times"
-        (click)="dialogVisible = false"
-        class="p-button-text"
-      />
-      <p-button
-        label="Save"
-        icon="pi pi-check"
-        form
-        [disabled]="!form.valid"
-        (click)="createTodo()"
-        class="p-button-text"
-      />
-    </div>
-  </form>
-</p-dialog>
+<div class="sounds">
+  <audio #audio controls [volume]="1">
+    <source [src]="`assets/sounds/${active.file}`" type="audio/mpeg" />
+  </audio>
+  @for (sound of sounds; track $index) {
+  <button
+    class="sound"
+    [ngClass]="{
+      active: sound === active,
+      paused: sound === active && audio.paused
+    }"
+    (click)="playSound(sound)"
+  >
+    {{ sound.name }}
+  </button>
+  }
+</div>

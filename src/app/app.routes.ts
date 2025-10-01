@@ -9,7 +9,7 @@ export const routes: Routes = [
     component: TerrorComponent,
   },
   {
-    path: 'admin/sounds',
+    path: 'sounds',
     title: 'Sounds',
     component: SoundsComponent,
   },

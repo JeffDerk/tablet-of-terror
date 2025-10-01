@@ -32,6 +32,7 @@ export const appConfig: ApplicationConfig = {
     providePrimeNG({
       theme: {
         preset: definePreset(Aura, theme),
+        options: {},
       },
     }),
   ],

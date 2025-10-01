@@ -5,10 +5,9 @@
         pButton
         class="p-button-link"
         icon="pi pi-bars"
-        size="small"
+        size="large"
         (click)="adminMenu.toggle($event)"
-        >Admin</a
-      >
+      ></a>
     </nav>
     <p-menu #adminMenu [model]="menuItems" [popup]="true" />
   </header>

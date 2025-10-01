@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { Amplify } from 'aws-amplify';
@@ -12,17 +12,17 @@ Amplify.configure(outputs);
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  imports: [RouterOutlet, ButtonModule, MenuModule, RouterLink],
+  imports: [RouterOutlet, ButtonModule, MenuModule],
 })
 export class AppComponent {
   menuItems: MenuItem[] = [
     {
-      label: 'Sounds',
-      routerLink: '/admin/sounds',
+      label: 'Home',
+      routerLink: '/',
     },
     {
-      label: 'Soundboard',
-      routerLink: '/admin/soundboard',
+      label: 'Sounds',
+      routerLink: '/sounds',
     },
   ];
 }
