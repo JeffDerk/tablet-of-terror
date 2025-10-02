@@ -38,10 +38,7 @@ export class SoundsComponent {
       name: 'Wacht muziekje tijdens bingo',
       file: 'Wacht muziekje tijdens bingo.m4a',
     },
-    {
-      name: 'Auf der Heide',
-      file: 'Auf-der-Heide.mp3',
-    },
+    { name: 'Auf der Heide', file: 'Auf-der-Heide.mp4' },
   ];
   active = this.sounds[0];
 
